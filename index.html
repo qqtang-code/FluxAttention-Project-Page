@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="title" content="TriAttention: Efficient KV Cache Compression for Long-Context Reasoning">
+  <meta name="description" content="TriAttention compresses KV cache for long-context reasoning by modeling stable pre-RoPE Q/K structure, enabling higher throughput and much lower memory use without losing reasoning accuracy.">
+  <meta name="keywords" content="TriAttention, KV cache compression, long-context reasoning, RoPE, LLM inference, OpenClaw">
+  <meta name="author" content="Weian Mao, Xi Lin, Wei Huang, Yuxin Xie, Tianfu Fu, Bohan Zhuang, Song Han, Yukang Chen">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="TriAttention Project Page">
+  <meta property="og:title" content="TriAttention: Efficient KV Cache Compression for Long-Context Reasoning">
+  <meta property="og:description" content="TriAttention leverages pre-RoPE trigonometric modeling to compress KV cache for long-context reasoning, preserving accuracy while improving throughput and memory efficiency.">
+  <meta property="og:url" content="https://weianmao.github.io/tri-attention-project-page">
+  <meta property="og:image" content="https://weianmao.github.io/static/images/triattention/teaser-results.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TriAttention performance teaser">
+  <meta property="article:published_time" content="2026-03-21T00:00:00.000Z">
+  <meta property="article:author" content="Weian Mao">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="KV Cache Compression">
+  <meta property="article:tag" content="Long-Context Reasoning">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TriAttention: Efficient KV Cache Compression for Long-Context Reasoning">
+  <meta name="twitter:description" content="TriAttention uses stable pre-RoPE structure to score KV importance for long-context reasoning.">
+  <meta name="twitter:image" content="https://weianmao.github.io/static/images/triattention/teaser-results.png">
+  <meta name="twitter:image:alt" content="TriAttention performance teaser">
+
+  <meta name="citation_title" content="TriAttention: Efficient Long Reasoning with Trigonometric KV Compression">
+  <meta name="citation_author" content="Mao, Weian">
+  <meta name="citation_author" content="Lin, Xi">
+  <meta name="citation_author" content="Huang, Wei">
+  <meta name="citation_author" content="Xie, Yuxin">
+  <meta name="citation_author" content="Fu, Tianfu">
+  <meta name="citation_author" content="Zhuang, Bohan">
+  <meta name="citation_author" content="Han, Song">
+  <meta name="citation_author" content="Chen, Yukang">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="Preprint">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2604.04921">
+
+  <meta name="theme-color" content="#0f766e">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <title>TriAttention | Efficient KV Cache Compression for Long-Context Reasoning</title>
+
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "TriAttention: Efficient Long Reasoning with Trigonometric KV Compression",
+    "description": "TriAttention compresses KV cache for long-context reasoning by leveraging stable pre-RoPE Q/K structure and trigonometric distance modeling.",
+    "author": [
+      {"@type": "Person", "name": "Weian Mao"},
+      {"@type": "Person", "name": "Xi Lin"},
+      {"@type": "Person", "name": "Wei Huang"},
+      {"@type": "Person", "name": "Yuxin Xie"},
+      {"@type": "Person", "name": "Tianfu Fu"},
+      {"@type": "Person", "name": "Bohan Zhuang"},
+      {"@type": "Person", "name": "Song Han"},
+      {"@type": "Person", "name": "Yukang Chen"}
+    ],
+    "datePublished": "2026-03-21",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Preprint"
+    }
+  }
+  </script>
+</head>
+<body>
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero publication-header">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">TriAttention: Efficient Long Reasoning with Trigonometric KV Compression</h1>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">Weian Mao<sup>1*</sup></span>
+                <span class="author-block">Xi Lin<sup>3*</sup></span>
+                <span class="author-block">Wei Huang<sup>2*</sup></span>
+                <span class="author-block">Yuxin Xie<sup>1</sup></span>
+                <span class="author-block">Tianfu Fu<sup>1</sup></span>
+                <span class="author-block">Bohan Zhuang<sup>3</sup></span>
+                <br>
+                <span class="author-block">Song Han<sup>1,2</sup></span>
+                <span class="author-block">Yukang Chen<sup>2</sup></span>
+              </div>
+
+              <div class="is-size-6 publication-authors">
+                <span class="author-block"><sup>1</sup>MIT</span>
+                <span class="author-block"><sup>2</sup>NVIDIA</span>
+                <span class="author-block"><sup>3</sup>ZJU</span>
+                <span class="author-block eql-cntrb">* Equal contribution</span>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a href="https://arxiv.org/pdf/2604.04921" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="https://github.com/WeianMao/triattention" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fab fa-github"></i></span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="#demo" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-play-circle"></i></span>
+                      <span>Demo</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="#method" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-cogs"></i></span>
+                      <span>Method</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="#results" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-chart-bar"></i></span>
+                      <span>Results</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-quote-right"></i></span>
+                      <span>BibTeX</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== OPENCLAW DEMO ===== -->
+    <section class="section demo-section" id="demo">
+      <div class="container is-max-widescreen">
+        <div class="section-heading has-text-centered">
+          <p class="section-kicker">Real-World Deployment</p>
+          <h2 class="title is-3">OpenClaw + 32B Model on a 24GB GPU: From OOM to Task Complete</h2>
+          <p class="section-intro">
+            Running a 32B model on a 24GB GPU leaves very little room for KV cache. OpenClaw ships with such lengthy default instructions that Full Attention hits out-of-memory before the agent can even start. TriAttention compresses KV cache on the fly, letting the agent run to completion.
+          </p>
+        </div>
+
+        <div class="demo-single-column">
+          <div class="demo-video-panel">
+            <video class="demo-video" controls playsinline preload="metadata">
+              <source src="static/videos/demo.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HIGHLIGHT NUMBERS ===== -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-variable is-5 insight-cards">
+          <div class="column">
+            <div class="insight-card highlight-card">
+              <div class="highlight-number">2.5&times;</div>
+              <h3>Throughput Gain</h3>
+              <p>On AIME25 at matched accuracy (40.8%), TriAttention delivers 2.5&times; higher throughput than Full Attention.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="insight-card highlight-card">
+              <div class="highlight-number">10.7&times;</div>
+              <h3>Memory Reduction</h3>
+              <p>TriAttention reduces KV cache memory by 10.7&times; while matching Full Attention reasoning accuracy on AIME25.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="insight-card highlight-card">
+              <div class="highlight-number">6.3&times;</div>
+              <h3>Peak Speedup</h3>
+              <p>On MATH 500, TriAttention reaches 1,405 tokens/s vs. 223 tokens/s for Full Attention (68.4% vs. 69.6% accuracy).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABSTRACT ===== -->
+    <section class="section hero is-light" id="abstract">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Extended reasoning in large language models (LLMs) requires long and accurate decoding and creates severe KV cache memory bottlenecks. Leading KV cache compression methods estimate KV importance using attention scores from recent post-RoPE queries. However, queries rotate with position during RoPE, making representative queries very few, leading to poor top-key selection and unstable reasoning.
+              </p>
+              <p>
+                To avoid this issue, we turn to the pre-RoPE space, where we observe that Q and K vectors are highly concentrated around fixed non-zero centers and remain stable across positions&mdash;<em>Q/K concentration</em>. We show that this concentration causes queries to preferentially attend to keys at specific distances (e.g., nearest keys), with the centers determining which distances are preferred via a trigonometric series. Based on this, we propose TriAttention to estimate key importance by leveraging these centers. Via the trigonometric series, we use the distance preference characterized by these centers to score keys according to their positions, and also leverage Q/K norms as an additional signal for importance estimation.
+              </p>
+              <p>
+                On AIME25 with 32K-token generation, TriAttention matches Full Attention reasoning accuracy while achieving 2.5&times; higher throughput or 10.7&times; KV memory reduction, whereas leading baselines achieve only about half the accuracy at the same efficiency.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KEY INSIGHT: Q/K CONCENTRATION ===== -->
+    <section class="section" id="insight">
+      <div class="container is-max-desktop">
+        <div class="section-heading has-text-centered">
+          <p class="section-kicker">Key Insight</p>
+          <h2 class="title is-3">Q/K Concentration in Pre-RoPE Space</h2>
+          <p class="section-intro">
+            Across most attention heads, pre-RoPE Q and K vectors are highly concentrated around fixed non-zero centers. This concentration is stable across positions and input contexts, and it makes attention patterns predictable via a trigonometric series.
+          </p>
+        </div>
+
+        <figure class="figure-panel">
+          <img src="static/images/triattention/qk-concentration.png" alt="Q/K concentration phenomenon: pre-RoPE vectors cluster around stable non-zero centers, enabling attention reconstruction via trigonometric series" loading="lazy">
+          <figcaption>
+            <strong>(A)</strong> Pre-RoPE Q/K vectors at the dominant frequency band are highly concentrated (high Mean Resultant Length <em>R</em>). <strong>(B)</strong> RoPE rotation disperses these vectors into arc patterns. Three distinct input sequences are overlaid, showing this structure is stable across content. <strong>(C)</strong> This concentration holds across nearly all heads. <strong>(D)</strong> When Q/K are concentrated, attention logits can be accurately reconstructed using a trigonometric series (Pearson <em>r</em> = 0.72).
+          </figcaption>
+        </figure>
+
+        <div class="columns is-variable is-5 insight-cards" style="margin-top: 2.5rem;">
+          <div class="column">
+            <div class="insight-card">
+              <h3>Post-RoPE is Unstable</h3>
+              <p>Existing methods use recent post-RoPE queries to estimate importance. But queries rotate with position, so only a tiny window is usable&mdash;important keys go undetected and permanently evicted.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="insight-card">
+              <h3>Pre-RoPE is Stable</h3>
+              <p>In pre-RoPE space, Q and K vectors cluster around non-zero centers that stay consistent across positions and inputs. These centers are intrinsic properties, unaffected by positional rotation.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="insight-card">
+              <h3>Distance Preferences are Predictable</h3>
+              <p>When Q/K are concentrated, the attention logit reduces to a trigonometric series in Q-K distance. The learned centers determine which distances each head prefers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RECONSTRUCTION VALIDATION ===== -->
+    <section class="section hero is-light" id="validation">
+      <div class="container is-max-desktop">
+        <div class="section-heading has-text-centered">
+          <p class="section-kicker">Experimental Validation</p>
+          <h2 class="title is-3">Trigonometric Series Accurately Reconstructs Attention</h2>
+          <p class="section-intro">
+            We validate across three DeepSeek-R1 distilled architectures that the trigonometric series computed from Q/K centers faithfully predicts actual attention patterns.
+          </p>
+        </div>
+
+        <figure class="figure-panel">
+          <img src="static/images/triattention/reconstruction-validation.png" alt="Attention reconstruction correlation across three DeepSeek-R1 distilled LLMs. All models show right-skewed distributions with means above 0.5." loading="lazy">
+          <figcaption>
+            Distribution of per-head reconstruction Pearson correlation (<em>r&#772;</em>) across all attention heads for Qwen3, Qwen2.5, and Llama3. The red dashed line indicates the mean. All models show right-skewed distributions with means above 0.5, confirming that Q/K concentration enables accurate attention prediction across architectures.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== METHOD ===== -->
+    <section class="section" id="method">
+      <div class="container is-max-desktop">
+        <div class="section-heading has-text-centered">
+          <p class="section-kicker">Method</p>
+          <h2 class="title is-3">TriAttention: Scoring Keys via Trigonometric Series</h2>
+          <p class="section-intro">
+            TriAttention scores each key by combining a trigonometric series score (capturing distance preferences) with a norm-based score (handling dispersed heads), balanced by Q/K concentration.
+          </p>
+        </div>
+
+        <figure class="figure-panel">
+          <img src="static/images/triattention/method-overview.png" alt="TriAttention method overview: offline calibration computes Q centers, then scoring combines trigonometric series and norm-based components for KV cache pruning" loading="lazy">
+          <figcaption>
+            <strong>Method overview.</strong> Offline calibration computes Q distribution centers. During inference, keys are scored by combining S<sub>trig</sub> (distance preference from trigonometric series) and norm-based components. S<sub>trig</sub> assigns low scores to keys at non-preferred distances, while the norm-based score identifies low-norm keys. Together, they accurately identify unimportant tokens for pruning.
+          </figcaption>
+        </figure>
+
+        <div class="columns is-variable is-5 insight-cards" style="margin-top: 2.5rem;">
+          <div class="column">
+            <div class="insight-card">
+              <h3>Trigonometric Series Score</h3>
+              <p>Uses Q centers from offline calibration and the trigonometric series to predict how much attention each key will receive at its current distance. Captures the distance preferences encoded in Q/K concentration.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="insight-card">
+              <h3>Norm-Based Score</h3>
+              <p>Complements the trigonometric series for the minority of heads where Q/K are less concentrated. Weights each frequency band by expected query contribution, accounting for variation around centers.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="insight-card">
+              <h3>Adaptive Weighting</h3>
+              <p>Uses Mean Resultant Length <em>R</em> to automatically balance the two components. When concentration is high, S<sub>trig</sub> dominates; when low, the norm-based score provides complementary signal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RESULTS ===== -->
+    <section class="section hero is-light" id="results">
+      <div class="container is-max-desktop">
+        <div class="section-heading has-text-centered">
+          <p class="section-kicker">Results</p>
+          <h2 class="title is-3">Matching Full Attention at a Fraction of the Cost</h2>
+        </div>
+
+        <!-- Teaser: Throughput & Memory Trade-off -->
+        <figure class="figure-panel" style="margin-bottom: 2.5rem;">
+          <img src="static/images/triattention/teaser-results.png" alt="Performance trade-offs on AIME25: TriAttention achieves 2.5x higher throughput and 10.7x KV memory reduction while matching Full Attention accuracy" loading="lazy" style="max-width: 60%; margin: 0 auto;">
+          <figcaption>
+            Performance trade-offs on AIME25 (Qwen3-8B). <strong>(A)</strong> At equivalent accuracy (40.8%), TriAttention achieves 2.5&times; higher throughput than Full Attention. <strong>(B)</strong> TriAttention reduces KV cache memory by 10.7&times; while matching Full Attention accuracy.
+          </figcaption>
+        </figure>
+
+        <!-- Results Table -->
+        <div class="results-table-wrapper">
+          <h3 class="subtitle is-5 has-text-centered" style="margin-bottom: 1rem;">Reasoning Performance on AIME24 &amp; AIME25 (KV Budget = 2048)</h3>
+          <div class="table-container">
+            <table class="table is-hoverable is-fullwidth results-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th colspan="4" class="has-text-centered">AIME24</th>
+                  <th colspan="4" class="has-text-centered">AIME25</th>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th>Qwen3-8B</th>
+                  <th>DS-Llama</th>
+                  <th>DS-Qwen</th>
+                  <th>GPT-OSS</th>
+                  <th>Qwen3-8B</th>
+                  <th>DS-Llama</th>
+                  <th>DS-Qwen</th>
+                  <th>GPT-OSS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="fullkv-row">
+                  <td>Full Attention</td>
+                  <td>57.1</td><td>50.4</td><td>43.8</td><td>69.2</td>
+                  <td>40.8</td><td>31.4</td><td>34.2</td><td>60.0</td>
+                </tr>
+                <tr>
+                  <td>SnapKV</td>
+                  <td>34.6</td><td>5.0</td><td>34.6</td><td>48.3</td>
+                  <td>20.0</td><td>6.7</td><td>25.0</td><td>36.7</td>
+                </tr>
+                <tr>
+                  <td>R-KV</td>
+                  <td>25.4</td><td>25.8</td><td>34.6</td><td>49.6</td>
+                  <td>17.5</td><td>11.2</td><td>23.3</td><td>39.2</td>
+                </tr>
+                <tr class="triattention-row">
+                  <td><strong>TriAttention</strong></td>
+                  <td><strong>42.1</strong></td><td><strong>33.8</strong></td><td><strong>42.5</strong></td><td><strong>59.2</strong></td>
+                  <td><strong>32.9</strong></td><td><strong>19.6</strong></td><td><strong>30.0</strong></td><td><strong>49.2</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Budget-Accuracy Curves -->
+        <figure class="figure-panel" style="margin-top: 2.5rem;">
+          <img src="static/images/triattention/budget-accuracy.png" alt="Performance comparison on Qwen3-8B: accuracy vs KV cache budget on three math reasoning benchmarks, plus memory retention benchmark" loading="lazy">
+          <figcaption>
+            Performance on Qwen3-8B. <strong>(A&ndash;C)</strong> Accuracy vs. KV cache budget on MATH 500, AIME24, and AIME25. TriAttention consistently outperforms R-KV across all budget levels. <strong>(D)</strong> Recursive State Query benchmark measuring memory retention under increasing depth. TriAttention performs comparably to Full Attention up to depth 16, while R-KV shows catastrophic degradation.
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- ===== BIBTEX ===== -->
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <pre id="bibtex-code"><code>@inproceedings{mao2026triattention,
+  title={TriAttention: Efficient Long Reasoning with Trigonometric KV Compression},
+  author={Mao, Weian and Lin, Xi and Huang, Wei and Xie, Yuxin and Fu, Tianfu and Zhuang, Bohan and Han, Song and Chen, Yukang},
+  booktitle={Preprint},
+  year={2026}
+}</code></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content has-text-centered">
+            <p>
+              This page is based on the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>, adapted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
