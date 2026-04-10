@@ -4,53 +4,53 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta name="title" content="TriAttention: Efficient KV Cache Compression for Long-Context Reasoning">
-  <meta name="description" content="TriAttention compresses KV cache for long-context reasoning by modeling stable pre-RoPE Q/K structure, enabling higher throughput and much lower memory use without losing reasoning accuracy.">
-  <meta name="keywords" content="TriAttention, KV cache compression, long-context reasoning, RoPE, LLM inference, OpenClaw">
-  <meta name="author" content="Weian Mao, Xi Lin, Wei Huang, Yuxin Xie, Tianfu Fu, Bohan Zhuang, Song Han, Yukang Chen">
+  <meta name="title" content="FluxAttention: Context-Aware Hybrid Attention for Efficient LLMs Inference">
+  <meta name="description" content="FluxAttention dynamically routes layers between full and sparse attention to improve long-context LLM inference speed.">
+  <meta name="keywords" content="FluxAttention, hybrid attention, LLM inference, efficient inference, context-aware attention, sparse attention">
+  <meta name="author" content="Quantong Qiu, Zhiyi Hong, Yi Yang, Haitian Wang, Kebin Liu, Qingqing Dang, Juntao Li, Min Zhang">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
 
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="TriAttention Project Page">
-  <meta property="og:title" content="TriAttention: Efficient KV Cache Compression for Long-Context Reasoning">
-  <meta property="og:description" content="TriAttention leverages pre-RoPE trigonometric modeling to compress KV cache for long-context reasoning, preserving accuracy while improving throughput and memory efficiency.">
-  <meta property="og:url" content="https://weianmao.github.io/tri-attention-project-page">
-  <meta property="og:image" content="https://weianmao.github.io/static/images/triattention/teaser-results.png">
+  <meta property="og:site_name" content="FluxAttention Project Page">
+  <meta property="og:title" content="FluxAttention: Context-Aware Hybrid Attention for Efficient LLMs Inference">
+  <meta property="og:description" content="FluxAttention dynamically routes layers between full and sparse attention to improve long-context LLM inference speed.">
+  <meta property="og:url" content="https://arxiv.org/abs/2604.07394">
+  <meta property="og:image" content="https://arxiv.org/static/arxiv.logo.small.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="TriAttention performance teaser">
-  <meta property="article:published_time" content="2026-03-21T00:00:00.000Z">
-  <meta property="article:author" content="Weian Mao">
+  <meta property="og:image:alt" content="FluxAttention performance teaser">
+  <meta property="article:published_time" content="2026-04-10T00:00:00.000Z">
+  <meta property="article:author" content="Quantong Qiu">
   <meta property="article:section" content="Research">
-  <meta property="article:tag" content="KV Cache Compression">
-  <meta property="article:tag" content="Long-Context Reasoning">
+  <meta property="article:tag" content="Hybrid Attention">
+  <meta property="article:tag" content="Efficient LLM Inference">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="TriAttention: Efficient KV Cache Compression for Long-Context Reasoning">
-  <meta name="twitter:description" content="TriAttention uses stable pre-RoPE structure to score KV importance for long-context reasoning.">
-  <meta name="twitter:image" content="https://weianmao.github.io/static/images/triattention/teaser-results.png">
-  <meta name="twitter:image:alt" content="TriAttention performance teaser">
+  <meta name="twitter:title" content="FluxAttention: Context-Aware Hybrid Attention for Efficient LLMs Inference">
+  <meta name="twitter:description" content="FluxAttention dynamically routes layers between full and sparse attention to improve long-context LLM inference speed.">
+  <meta name="twitter:image" content="https://arxiv.org/static/arxiv.logo.small.png">
+  <meta name="twitter:image:alt" content="FluxAttention performance teaser">
 
-  <meta name="citation_title" content="TriAttention: Efficient Long Reasoning with Trigonometric KV Compression">
-  <meta name="citation_author" content="Mao, Weian">
-  <meta name="citation_author" content="Lin, Xi">
-  <meta name="citation_author" content="Huang, Wei">
-  <meta name="citation_author" content="Xie, Yuxin">
-  <meta name="citation_author" content="Fu, Tianfu">
-  <meta name="citation_author" content="Zhuang, Bohan">
-  <meta name="citation_author" content="Han, Song">
-  <meta name="citation_author" content="Chen, Yukang">
+  <meta name="citation_title" content="FluxAttention: Context-Aware Hybrid Attention for Efficient LLMs Inference">
+  <meta name="citation_author" content="Qiu, Quantong">
+  <meta name="citation_author" content="Hong, Zhiyi">
+  <meta name="citation_author" content="Yang, Yi">
+  <meta name="citation_author" content="Wang, Haitian">
+  <meta name="citation_author" content="Liu, Kebin">
+  <meta name="citation_author" content="Dang, Qingqing">
+  <meta name="citation_author" content="Li, Juntao">
+  <meta name="citation_author" content="Zhang, Min">
   <meta name="citation_publication_date" content="2026">
   <meta name="citation_conference_title" content="Preprint">
-  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2604.04921">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2604.07394">
 
   <meta name="theme-color" content="#0f766e">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <title>TriAttention | Efficient KV Cache Compression for Long-Context Reasoning</title>
+  <title>FluxAttention | Context-Aware Hybrid Attention for Efficient LLMs Inference</title>
 
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -72,17 +72,17 @@
   {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
-    "headline": "TriAttention: Efficient Long Reasoning with Trigonometric KV Compression",
-    "description": "TriAttention compresses KV cache for long-context reasoning by leveraging stable pre-RoPE Q/K structure and trigonometric distance modeling.",
+    "headline": "FluxAttention: Context-Aware Hybrid Attention for Efficient LLMs Inference",
+    "description": "FluxAttention introduces a context-aware layer router for hybrid attention, improving long-context inference efficiency.",
     "author": [
-      {"@type": "Person", "name": "Weian Mao"},
-      {"@type": "Person", "name": "Xi Lin"},
-      {"@type": "Person", "name": "Wei Huang"},
-      {"@type": "Person", "name": "Yuxin Xie"},
-      {"@type": "Person", "name": "Tianfu Fu"},
-      {"@type": "Person", "name": "Bohan Zhuang"},
-      {"@type": "Person", "name": "Song Han"},
-      {"@type": "Person", "name": "Yukang Chen"}
+      {"@type": "Person", "name": "Quantong Qiu"},
+      {"@type": "Person", "name": "Zhiyi Hong"},
+      {"@type": "Person", "name": "Yi Yang"},
+      {"@type": "Person", "name": "Haitian Wang"},
+      {"@type": "Person", "name": "Kebin Liu"},
+      {"@type": "Person", "name": "Qingqing Dang"},
+      {"@type": "Person", "name": "Juntao Li"},
+      {"@type": "Person", "name": "Min Zhang"}
     ],
     "datePublished": "2026-03-21",
     "publisher": {
@@ -105,39 +105,37 @@
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <h1 class="title is-1 publication-title">TriAttention: Efficient Long Reasoning with Trigonometric KV Compression</h1>
+              <h1 class="title is-1 publication-title">FluxAttention: Context-Aware Hybrid Attention for Efficient LLMs Inference</h1>
 
               <div class="is-size-5 publication-authors">
-                <span class="author-block">Weian Mao<sup>1*</sup></span>
-                <span class="author-block">Xi Lin<sup>3*</sup></span>
-                <span class="author-block">Wei Huang<sup>2*</sup></span>
-                <span class="author-block">Yuxin Xie<sup>1</sup></span>
-                <span class="author-block">Tianfu Fu<sup>1</sup></span>
-                <span class="author-block">Bohan Zhuang<sup>3</sup></span>
-                <br>
-                <span class="author-block">Song Han<sup>1,2</sup></span>
-                <span class="author-block">Yukang Chen<sup>2</sup></span>
+                <span class="author-block">Quantong Qiu<sup>1</sup></span>
+                <span class="author-block">Zhiyi Hong<sup>1</sup></span>
+                <span class="author-block">Yi Yang<sup>1</sup></span>
+                <span class="author-block">Haitian Wang<sup>1</sup></span>
+                <span class="author-block">Kebin Liu<sup>2</sup></span>
+                <span class="author-block">Qingqing Dang<sup>2</sup></span>
+                <span class="author-block">Juntao Li<sup>1*</sup></span>
+                <span class="author-block">Min Zhang<sup>1</sup></span>
               </div>
 
               <div class="is-size-6 publication-authors">
-                <span class="author-block"><sup>1</sup>MIT</span>
-                <span class="author-block"><sup>2</sup>NVIDIA</span>
-                <span class="author-block"><sup>3</sup>ZJU</span>
-                <span class="author-block eql-cntrb">* Equal contribution</span>
+                <span class="author-block"><sup>1</sup>School of Computer Science and Technology, Soochow University</span>
+                <span class="author-block"><sup>2</sup>Baidu Inc, China</span>
+                <span class="author-block">* Corresponding author: ljt@suda.edu.cn</span>
               </div>
 
               <div class="column has-text-centered">
                 <div class="publication-links">
                   <span class="link-block">
-                    <a href="https://arxiv.org/pdf/2604.04921" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <a href="https://arxiv.org/pdf/2604.07394" target="_blank" class="external-link button is-normal is-rounded is-dark">
                       <span class="icon"><i class="fas fa-file-pdf"></i></span>
                       <span>Paper</span>
                     </a>
                   </span>
                   <span class="link-block">
-                    <a href="https://github.com/WeianMao/triattention" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fab fa-github"></i></span>
-                      <span>Code</span>
+                    <a href="https://arxiv.org/abs/2604.07394" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-book"></i></span>
+                      <span>arXiv</span>
                     </a>
                   </span>
                   <span class="link-block">
@@ -172,14 +170,14 @@
       </div>
     </section>
 
-    <!-- ===== OPENCLAW DEMO ===== -->
+    <!-- ===== DEMO ===== -->
     <section class="section demo-section" id="demo">
       <div class="container is-max-widescreen">
         <div class="section-heading has-text-centered">
-          <p class="section-kicker">Real-World Deployment</p>
-          <h2 class="title is-3">OpenClaw + 32B Model on a 24GB GPU: From OOM to Task Complete</h2>
+          <p class="section-kicker">Motivation</p>
+          <h2 class="title is-3">Why Static or Head-Level Sparsity Is Not Enough</h2>
           <p class="section-intro">
-            Running a 32B model on a 24GB GPU leaves very little room for KV cache. OpenClaw ships with such lengthy default instructions that Full Attention hits out-of-memory before the agent can even start. TriAttention compresses KV cache on the fly, letting the agent run to completion.
+            The paper shows two key bottlenecks: static sparsity can cause task-dependent performance collapse, and head-level dynamic sparsity introduces synchronization long-tail effects that limit real decode speedup on hardware.
           </p>
         </div>
 
@@ -199,23 +197,23 @@
         <div class="columns is-variable is-5 insight-cards">
           <div class="column">
             <div class="insight-card highlight-card">
-              <div class="highlight-number">2.5&times;</div>
-              <h3>Throughput Gain</h3>
-              <p>On AIME25 at matched accuracy (40.8%), TriAttention delivers 2.5&times; higher throughput than Full Attention.</p>
+              <div class="highlight-number">2.8&times;</div>
+              <h3>Prefill Speedup</h3>
+              <p>FluxAttention reports up to 2.8&times; speed improvement in the prefill stage through layer-wise routing between Full Attention and Sparse Attention.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card highlight-card">
-              <div class="highlight-number">10.7&times;</div>
-              <h3>Memory Reduction</h3>
-              <p>TriAttention reduces KV cache memory by 10.7&times; while matching Full Attention reasoning accuracy on AIME25.</p>
+              <div class="highlight-number">2.0&times;</div>
+              <h3>Decode Speedup</h3>
+              <p>FluxAttention achieves up to 2.0&times; speed improvement in the decode stage while preserving high-fidelity retrieval.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card highlight-card">
-              <div class="highlight-number">6.3&times;</div>
-              <h3>Peak Speedup</h3>
-              <p>On MATH 500, TriAttention reaches 1,405 tokens/s vs. 223 tokens/s for Full Attention (68.4% vs. 69.6% accuracy).</p>
+              <div class="highlight-number">12h</div>
+              <h3>Efficient Training</h3>
+              <p>The framework is parameter-efficient and requires only 12 hours of training on 8&times;A800 GPUs.</p>
             </div>
           </div>
         </div>
@@ -230,13 +228,13 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                Extended reasoning in large language models (LLMs) requires long and accurate decoding and creates severe KV cache memory bottlenecks. Leading KV cache compression methods estimate KV importance using attention scores from recent post-RoPE queries. However, queries rotate with position during RoPE, making representative queries very few, leading to poor top-key selection and unstable reasoning.
+                The quadratic computational complexity of standard attention mechanisms presents a severe scalability bottleneck for LLMs in long-context scenarios. While hybrid attention mechanisms combining Full Attention (FA) and Sparse Attention (SA) offer a potential solution, existing methods typically rely on static allocation ratios that fail to accommodate the variable retrieval demands of different tasks.
               </p>
               <p>
-                To avoid this issue, we turn to the pre-RoPE space, where we observe that Q and K vectors are highly concentrated around fixed non-zero centers and remain stable across positions&mdash;<em>Q/K concentration</em>. We show that this concentration causes queries to preferentially attend to keys at specific distances (e.g., nearest keys), with the centers determining which distances are preferred via a trigonometric series. Based on this, we propose TriAttention to estimate key importance by leveraging these centers. Via the trigonometric series, we use the distance preference characterized by these centers to score keys according to their positions, and also leverage Q/K norms as an additional signal for importance estimation.
+                Furthermore, head-level dynamic sparsity often introduces severe computational load imbalance and synchronization long-tails, which hinder hardware acceleration during autoregressive decoding. To bridge this gap, we introduce <em>Flux Attention</em>, a context-aware framework that dynamically optimizes attention computation at the layer level.
               </p>
               <p>
-                On AIME25 with 32K-token generation, TriAttention matches Full Attention reasoning accuracy while achieving 2.5&times; higher throughput or 10.7&times; KV memory reduction, whereas leading baselines achieve only about half the accuracy at the same efficiency.
+                By integrating a lightweight <em>Layer Router</em> into frozen pretrained LLMs, the proposed method adaptively routes each layer to FA or SA based on the input context. This layer-wise routing preserves high-fidelity information retrieval while ensuring contiguous memory access, translating theoretical computational reductions into practical wall-clock speedups. As a parameter-efficient approach, our framework requires only 12 hours of training on 8&times;A800 GPUs. Extensive experiments across multiple long-context and mathematical reasoning benchmarks demonstrate that Flux Attention achieves a superior trade-off between performance and inference speed compared with baseline models, with speed improvements of up to 2.8&times; and 2.0&times; in the prefill and decode stages.
               </p>
             </div>
           </div>
@@ -244,41 +242,41 @@
       </div>
     </section>
 
-    <!-- ===== KEY INSIGHT: Q/K CONCENTRATION ===== -->
+    <!-- ===== KEY INSIGHT ===== -->
     <section class="section" id="insight">
       <div class="container is-max-desktop">
         <div class="section-heading has-text-centered">
           <p class="section-kicker">Key Insight</p>
-          <h2 class="title is-3">Q/K Concentration in Pre-RoPE Space</h2>
+          <h2 class="title is-3">Context-Aware Routing Should Happen at Layer Granularity</h2>
           <p class="section-intro">
-            Across most attention heads, pre-RoPE Q and K vectors are highly concentrated around fixed non-zero centers. This concentration is stable across positions and input contexts, and it makes attention patterns predictable via a trigonometric series.
+            FluxAttention uses a lightweight Layer Router to adaptively select Full Attention or Sparse Attention per layer, preserving retrieval quality while improving practical efficiency.
           </p>
         </div>
 
         <figure class="figure-panel">
-          <img src="static/images/triattention/qk-concentration.png" alt="Q/K concentration phenomenon: pre-RoPE vectors cluster around stable non-zero centers, enabling attention reconstruction via trigonometric series" loading="lazy">
+          <img src="static/images/fluxattention/qk-concentration.png" alt="FluxAttention motivation: task-dependent sparsity sensitivity and decode efficiency comparison" loading="lazy">
           <figcaption>
-            <strong>(A)</strong> Pre-RoPE Q/K vectors at the dominant frequency band are highly concentrated (high Mean Resultant Length <em>R</em>). <strong>(B)</strong> RoPE rotation disperses these vectors into arc patterns. Three distinct input sequences are overlaid, showing this structure is stable across content. <strong>(C)</strong> This concentration holds across nearly all heads. <strong>(D)</strong> When Q/K are concentrated, attention logits can be accurately reconstructed using a trigonometric series (Pearson <em>r</em> = 0.72).
+            Impact of sparsity on model quality and decode efficiency: static sparsity can trigger task-specific performance collapse, while layer-level routing provides better practical speedup than head-level routing.
           </figcaption>
         </figure>
 
         <div class="columns is-variable is-5 insight-cards" style="margin-top: 2.5rem;">
           <div class="column">
             <div class="insight-card">
-              <h3>Post-RoPE is Unstable</h3>
-              <p>Existing methods use recent post-RoPE queries to estimate importance. But queries rotate with position, so only a tiny window is usable&mdash;important keys go undetected and permanently evicted.</p>
+              <h3>Static Ratios Are Brittle</h3>
+              <p>Task requirements vary: retrieval-intensive tasks need denser token interaction, while context-holistic tasks can tolerate higher sparsity.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
-              <h3>Pre-RoPE is Stable</h3>
-              <p>In pre-RoPE space, Q and K vectors cluster around non-zero centers that stay consistent across positions and inputs. These centers are intrinsic properties, unaffected by positional rotation.</p>
+              <h3>Layer-Level Routing Helps</h3>
+              <p>The router predicts layer-wise attention mode from context, enabling dynamic computation allocation without per-head fragmentation.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
-              <h3>Distance Preferences are Predictable</h3>
-              <p>When Q/K are concentrated, the attention logit reduces to a trigonometric series in Q-K distance. The learned centers determine which distances each head prefers.</p>
+              <h3>Hardware Efficiency Matters</h3>
+              <p>Uniform layer-level workloads reduce synchronization stalls and better translate theoretical FLOP savings into wall-clock decode gains.</p>
             </div>
           </div>
         </div>
@@ -290,16 +288,16 @@
       <div class="container is-max-desktop">
         <div class="section-heading has-text-centered">
           <p class="section-kicker">Experimental Validation</p>
-          <h2 class="title is-3">Trigonometric Series Accurately Reconstructs Attention</h2>
+          <h2 class="title is-3">Context-Aware Routing Improves Long-Context Inference</h2>
           <p class="section-intro">
-            We validate across three DeepSeek-R1 distilled architectures that the trigonometric series computed from Q/K centers faithfully predicts actual attention patterns.
+            FluxAttention is evaluated on multiple long-context and mathematical reasoning benchmarks, where it delivers better speed-performance trade-offs than baseline models.
           </p>
         </div>
 
         <figure class="figure-panel">
-          <img src="static/images/triattention/reconstruction-validation.png" alt="Attention reconstruction correlation across three DeepSeek-R1 distilled LLMs. All models show right-skewed distributions with means above 0.5." loading="lazy">
+          <img src="static/images/fluxattention/reconstruction-validation.png" alt="FluxAttention benchmark validation across long-context and reasoning tasks" loading="lazy">
           <figcaption>
-            Distribution of per-head reconstruction Pearson correlation (<em>r&#772;</em>) across all attention heads for Qwen3, Qwen2.5, and Llama3. The red dashed line indicates the mean. All models show right-skewed distributions with means above 0.5, confirming that Q/K concentration enables accurate attention prediction across architectures.
+            Benchmark validation demonstrates that FluxAttention improves the performance-efficiency trade-off across long-context and mathematical reasoning settings.
           </figcaption>
         </figure>
       </div>
@@ -310,36 +308,36 @@
       <div class="container is-max-desktop">
         <div class="section-heading has-text-centered">
           <p class="section-kicker">Method</p>
-          <h2 class="title is-3">TriAttention: Scoring Keys via Trigonometric Series</h2>
+          <h2 class="title is-3">FluxAttention: Layer Router for Hybrid Attention</h2>
           <p class="section-intro">
-            TriAttention scores each key by combining a trigonometric series score (capturing distance preferences) with a norm-based score (handling dispersed heads), balanced by Q/K concentration.
+            FluxAttention integrates a lightweight Layer Router into frozen pretrained LLMs and learns soft routing with Gumbel-Softmax during training, then discretizes to hard routing at inference.
           </p>
         </div>
 
         <figure class="figure-panel">
-          <img src="static/images/triattention/method-overview.png" alt="TriAttention method overview: offline calibration computes Q centers, then scoring combines trigonometric series and norm-based components for KV cache pruning" loading="lazy">
+          <img src="static/images/fluxattention/method-overview.png" alt="FluxAttention method overview with layer router and hybrid attention routing" loading="lazy">
           <figcaption>
-            <strong>Method overview.</strong> Offline calibration computes Q distribution centers. During inference, keys are scored by combining S<sub>trig</sub> (distance preference from trigonometric series) and norm-based components. S<sub>trig</sub> assigns low scores to keys at non-preferred distances, while the norm-based score identifies low-norm keys. Together, they accurately identify unimportant tokens for pruning.
+            <strong>Method overview.</strong> The router evaluates prompt context and routes each layer to FA or SA. Training updates only the router while freezing backbone LLM parameters.
           </figcaption>
         </figure>
 
         <div class="columns is-variable is-5 insight-cards" style="margin-top: 2.5rem;">
           <div class="column">
             <div class="insight-card">
-              <h3>Trigonometric Series Score</h3>
-              <p>Uses Q centers from offline calibration and the trigonometric series to predict how much attention each key will receive at its current distance. Captures the distance preferences encoded in Q/K concentration.</p>
+              <h3>Layer Router</h3>
+              <p>Routes each layer to Full Attention or Sparse Attention according to the current context and retrieval demand.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
-              <h3>Norm-Based Score</h3>
-              <p>Complements the trigonometric series for the minority of heads where Q/K are less concentrated. Weights each frequency band by expected query contribution, accounting for variation around centers.</p>
+              <h3>Soft-to-Hard Routing</h3>
+              <p>Uses differentiable Gumbel-Softmax in training and deterministic hard routing in inference for practical deployment.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
-              <h3>Adaptive Weighting</h3>
-              <p>Uses Mean Resultant Length <em>R</em> to automatically balance the two components. When concentration is high, S<sub>trig</sub> dominates; when low, the norm-based score provides complementary signal.</p>
+              <h3>Parameter Efficiency</h3>
+              <p>The router can be trained efficiently on frozen pretrained LLMs, requiring only 12 hours on 8&times;A800 GPUs.</p>
             </div>
           </div>
         </div>
@@ -351,71 +349,43 @@
       <div class="container is-max-desktop">
         <div class="section-heading has-text-centered">
           <p class="section-kicker">Results</p>
-          <h2 class="title is-3">Matching Full Attention at a Fraction of the Cost</h2>
+          <h2 class="title is-3">Better Speed-Performance Trade-Offs Across Benchmarks</h2>
         </div>
 
         <!-- Teaser: Throughput & Memory Trade-off -->
         <figure class="figure-panel" style="margin-bottom: 2.5rem;">
-          <img src="static/images/triattention/teaser-results.png" alt="Performance trade-offs on AIME25: TriAttention achieves 2.5x higher throughput and 10.7x KV memory reduction while matching Full Attention accuracy" loading="lazy" style="max-width: 60%; margin: 0 auto;">
+          <img src="static/images/fluxattention/teaser-results.png" alt="FluxAttention speedup summary in prefill and decode stages" loading="lazy" style="max-width: 60%; margin: 0 auto;">
           <figcaption>
-            Performance trade-offs on AIME25 (Qwen3-8B). <strong>(A)</strong> At equivalent accuracy (40.8%), TriAttention achieves 2.5&times; higher throughput than Full Attention. <strong>(B)</strong> TriAttention reduces KV cache memory by 10.7&times; while matching Full Attention accuracy.
+            Main claim from the paper: FluxAttention achieves up to 2.8&times; prefill speedup and 2.0&times; decode speedup while maintaining strong task performance.
           </figcaption>
         </figure>
 
-        <!-- Results Table -->
-        <div class="results-table-wrapper">
-          <h3 class="subtitle is-5 has-text-centered" style="margin-bottom: 1rem;">Reasoning Performance on AIME24 &amp; AIME25 (KV Budget = 2048)</h3>
-          <div class="table-container">
-            <table class="table is-hoverable is-fullwidth results-table">
-              <thead>
-                <tr>
-                  <th>Method</th>
-                  <th colspan="4" class="has-text-centered">AIME24</th>
-                  <th colspan="4" class="has-text-centered">AIME25</th>
-                </tr>
-                <tr>
-                  <th></th>
-                  <th>Qwen3-8B</th>
-                  <th>DS-Llama</th>
-                  <th>DS-Qwen</th>
-                  <th>GPT-OSS</th>
-                  <th>Qwen3-8B</th>
-                  <th>DS-Llama</th>
-                  <th>DS-Qwen</th>
-                  <th>GPT-OSS</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="fullkv-row">
-                  <td>Full Attention</td>
-                  <td>57.1</td><td>50.4</td><td>43.8</td><td>69.2</td>
-                  <td>40.8</td><td>31.4</td><td>34.2</td><td>60.0</td>
-                </tr>
-                <tr>
-                  <td>SnapKV</td>
-                  <td>34.6</td><td>5.0</td><td>34.6</td><td>48.3</td>
-                  <td>20.0</td><td>6.7</td><td>25.0</td><td>36.7</td>
-                </tr>
-                <tr>
-                  <td>R-KV</td>
-                  <td>25.4</td><td>25.8</td><td>34.6</td><td>49.6</td>
-                  <td>17.5</td><td>11.2</td><td>23.3</td><td>39.2</td>
-                </tr>
-                <tr class="triattention-row">
-                  <td><strong>TriAttention</strong></td>
-                  <td><strong>42.1</strong></td><td><strong>33.8</strong></td><td><strong>42.5</strong></td><td><strong>59.2</strong></td>
-                  <td><strong>32.9</strong></td><td><strong>19.6</strong></td><td><strong>30.0</strong></td><td><strong>49.2</strong></td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="columns is-variable is-5 insight-cards" style="margin-top: 2rem;">
+          <div class="column">
+            <div class="insight-card">
+              <h3>Dynamic Task Adaptation</h3>
+              <p>The router adjusts layer sparsity by context, improving robustness across retrieval-intensive and context-holistic tasks.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="insight-card">
+              <h3>Real Decode Gains</h3>
+              <p>Layer-level routing avoids head-level synchronization long-tail and delivers stronger decode acceleration in practice.</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="insight-card">
+              <h3>Fast Adaptation Cost</h3>
+              <p>Parameter-efficient tuning converges in about 12 hours on 8&times;A800 GPUs with frozen backbone weights.</p>
+            </div>
           </div>
         </div>
 
         <!-- Budget-Accuracy Curves -->
         <figure class="figure-panel" style="margin-top: 2.5rem;">
-          <img src="static/images/triattention/budget-accuracy.png" alt="Performance comparison on Qwen3-8B: accuracy vs KV cache budget on three math reasoning benchmarks, plus memory retention benchmark" loading="lazy">
+          <img src="static/images/fluxattention/budget-accuracy.png" alt="FluxAttention detailed results on efficiency and performance trade-offs" loading="lazy">
           <figcaption>
-            Performance on Qwen3-8B. <strong>(A&ndash;C)</strong> Accuracy vs. KV cache budget on MATH 500, AIME24, and AIME25. TriAttention consistently outperforms R-KV across all budget levels. <strong>(D)</strong> Recursive State Query benchmark measuring memory retention under increasing depth. TriAttention performs comparably to Full Attention up to depth 16, while R-KV shows catastrophic degradation.
+            Detailed comparisons highlight robust quality under adaptive sparsity and practical acceleration benefits from layer-level routing.
           </figcaption>
         </figure>
 
@@ -432,11 +402,14 @@
             <span class="copy-text">Copy</span>
           </button>
         </div>
-        <pre id="bibtex-code"><code>@inproceedings{mao2026triattention,
-  title={TriAttention: Efficient Long Reasoning with Trigonometric KV Compression},
-  author={Mao, Weian and Lin, Xi and Huang, Wei and Xie, Yuxin and Fu, Tianfu and Zhuang, Bohan and Han, Song and Chen, Yukang},
-  booktitle={Preprint},
-  year={2026}
+          <pre id="bibtex-code"><code>@misc{qiu2026fluxattentioncontextawarehybrid,
+  title={FluxAttention: Context-Aware Hybrid Attention for Efficient LLMs Inference},
+          author={Quantong Qiu and Zhiyi Hong and Yi Yang and Haitian Wang and Kebin Liu and Qingqing Dang and Juntao Li and Min Zhang},
+          year={2026},
+          eprint={2604.07394},
+          archivePrefix={arXiv},
+          primaryClass={cs.LG},
+          url={https://arxiv.org/abs/2604.07394}
 }</code></pre>
       </div>
     </section>
