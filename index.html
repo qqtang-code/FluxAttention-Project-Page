@@ -52,7 +52,7 @@
 
   <title>FluxAttention | Context-Aware Hybrid Attention for Efficient LLMs Inference</title>
 
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.png">
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
   <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -139,9 +139,9 @@
                     </a>
                   </span>
                   <span class="link-block">
-                    <a href="#demo" class="external-link button is-normal is-rounded is-dark">
+                    <a href="#insight" class="external-link button is-normal is-rounded is-dark">
                       <span class="icon"><i class="fas fa-play-circle"></i></span>
-                      <span>Demo</span>
+                      <span>Insight</span>
                     </a>
                   </span>
                   <span class="link-block">
@@ -165,27 +165,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== DEMO ===== -->
-    <section class="section demo-section" id="demo">
-      <div class="container is-max-widescreen">
-        <div class="section-heading has-text-centered">
-          <p class="section-kicker">Motivation</p>
-          <h2 class="title is-3">Why Static or Head-Level Sparsity Is Not Enough</h2>
-          <p class="section-intro">
-            The paper shows two key bottlenecks: static sparsity can cause task-dependent performance collapse, and head-level dynamic sparsity introduces synchronization long-tail effects that limit real decode speedup on hardware.
-          </p>
-        </div>
-
-        <div class="demo-single-column">
-          <div class="demo-video-panel">
-            <video class="demo-video" controls playsinline preload="metadata">
-              <source src="static/videos/demo.mp4" type="video/mp4">
-            </video>
           </div>
         </div>
       </div>
@@ -247,6 +226,7 @@
       <div class="container is-max-desktop">
         <div class="section-heading has-text-centered">
           <p class="section-kicker">Key Insight</p>
+          <h2 class="title is-3">Why Static or Head-Level Sparsity Is Not Enough</h2>
           <h2 class="title is-3">Context-Aware Routing Should Happen at Layer Granularity</h2>
           <p class="section-intro">
             FluxAttention uses a lightweight Layer Router to adaptively select Full Attention or Sparse Attention per layer, preserving retrieval quality while improving practical efficiency.
@@ -254,7 +234,7 @@
         </div>
 
         <figure class="figure-panel">
-          <img src="static/images/fluxattention/qk-concentration.png" alt="FluxAttention motivation: task-dependent sparsity sensitivity and decode efficiency comparison" loading="lazy">
+          <img src="static/images/fluxattention/preliminary.png" alt="FluxAttention motivation: task-dependent sparsity sensitivity and decode efficiency comparison" loading="lazy">
           <figcaption>
             Impact of sparsity on model quality and decode efficiency: static sparsity can trigger task-specific performance collapse, while layer-level routing provides better practical speedup than head-level routing.
           </figcaption>
@@ -295,7 +275,7 @@
         </div>
 
         <figure class="figure-panel">
-          <img src="static/images/fluxattention/reconstruction-validation.png" alt="FluxAttention benchmark validation across long-context and reasoning tasks" loading="lazy">
+          <img src="static/images/fluxattention/ruler.png" alt="FluxAttention benchmark validation across long-context and reasoning tasks" loading="lazy">
           <figcaption>
             Benchmark validation demonstrates that FluxAttention improves the performance-efficiency trade-off across long-context and mathematical reasoning settings.
           </figcaption>
@@ -315,7 +295,7 @@
         </div>
 
         <figure class="figure-panel">
-          <img src="static/images/fluxattention/method-overview.png" alt="FluxAttention method overview with layer router and hybrid attention routing" loading="lazy">
+          <img src="static/images/fluxattention/arch.png" alt="FluxAttention method overview with layer router and hybrid attention routing" loading="lazy">
           <figcaption>
             <strong>Method overview.</strong> The router evaluates prompt context and routes each layer to FA or SA. Training updates only the router while freezing backbone LLM parameters.
           </figcaption>
@@ -354,7 +334,7 @@
 
         <!-- Teaser: Throughput & Memory Trade-off -->
         <figure class="figure-panel" style="margin-bottom: 2.5rem;">
-          <img src="static/images/fluxattention/teaser-results.png" alt="FluxAttention speedup summary in prefill and decode stages" loading="lazy" style="max-width: 60%; margin: 0 auto;">
+          <img src="static/images/fluxattention/speedup.png" alt="FluxAttention speedup summary in prefill and decode stages" loading="lazy" style="max-width: 80%; margin: 0 auto;">
           <figcaption>
             Main claim from the paper: FluxAttention achieves up to 2.8&times; prefill speedup and 2.0&times; decode speedup while maintaining strong task performance.
           </figcaption>
@@ -383,7 +363,7 @@
 
         <!-- Budget-Accuracy Curves -->
         <figure class="figure-panel" style="margin-top: 2.5rem;">
-          <img src="static/images/fluxattention/budget-accuracy.png" alt="FluxAttention detailed results on efficiency and performance trade-offs" loading="lazy">
+          <img src="static/images/fluxattention/longbench.png" alt="FluxAttention detailed results on efficiency and performance trade-offs" loading="lazy">
           <figcaption>
             Detailed comparisons highlight robust quality under adaptive sparsity and practical acceleration benefits from layer-level routing.
           </figcaption>
