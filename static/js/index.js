@@ -1,44 +1,8 @@
-window.HELP_IMPROVE_VIDEOJS = false;
-
-// More Works Dropdown Functionality
-function toggleMoreWorks() {
-    const dropdown = document.getElementById('moreWorksDropdown');
-    const button = document.querySelector('.more-works-btn');
-
-    if (!dropdown || !button) return;
-    
-    if (dropdown.classList.contains('show')) {
-        dropdown.classList.remove('show');
-        button.classList.remove('active');
-    } else {
-        dropdown.classList.add('show');
-        button.classList.add('active');
-    }
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function(event) {
-    const container = document.querySelector('.more-works-container');
-    const dropdown = document.getElementById('moreWorksDropdown');
-    const button = document.querySelector('.more-works-btn');
-    
-    if (container && dropdown && button && !container.contains(event.target)) {
-        dropdown.classList.remove('show');
-        button.classList.remove('active');
-    }
-});
-
-// Close dropdown on escape key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        const dropdown = document.getElementById('moreWorksDropdown');
-        const button = document.querySelector('.more-works-btn');
-        if (dropdown && button) {
-            dropdown.classList.remove('show');
-            button.classList.remove('active');
-        }
-    }
-});
+/* FluxAttention project page scripts.
+   Plain DOM APIs only: the page has no carousel, slider or video, so the
+   template's jQuery/bulma-carousel hooks were dropped along with the jQuery
+   CDN request (blocked on some networks, and a blocked script used to take the
+   navigation down with it). */
 
 // Copy BibTeX to clipboard
 function copyBibTeX() {
@@ -86,104 +50,23 @@ function copyBibTeX() {
 
 // Scroll to top functionality
 function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Show/hide scroll to top button
-window.addEventListener('scroll', function() {
+// Show/hide the scroll-to-top button
+function setupScrollToTop() {
     const scrollButton = document.querySelector('.scroll-to-top');
-    if (window.pageYOffset > 300) {
-        scrollButton.classList.add('visible');
-    } else {
-        scrollButton.classList.remove('visible');
-    }
-});
+    if (!scrollButton) return;
 
-// Video carousel autoplay when in view
-function setupVideoCarouselAutoplay() {
-    const carouselVideos = document.querySelectorAll('.results-carousel video');
-    
-    if (carouselVideos.length === 0) return;
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target;
-            if (entry.isIntersecting) {
-                // Video is in view, play it
-                video.play().catch(e => {
-                    // Autoplay failed, probably due to browser policy
-                    console.log('Autoplay prevented:', e);
-                });
-            } else {
-                // Video is out of view, pause it
-                video.pause();
-            }
-        });
-    }, {
-        threshold: 0.5 // Trigger when 50% of the video is visible
-    });
-    
-    carouselVideos.forEach(video => {
-        observer.observe(video);
-    });
-}
-
-function setupDemoVideoPlayback() {
-    const demoVideo = document.querySelector('.demo-video[data-playback-rate]');
-
-    if (!demoVideo) return;
-
-    const playbackRate = Number(demoVideo.dataset.playbackRate || '1');
-    let isEnforcingPlaybackRate = false;
-
-    const applyPlaybackRate = () => {
-        if (isEnforcingPlaybackRate) return;
-
-        isEnforcingPlaybackRate = true;
-        demoVideo.defaultPlaybackRate = playbackRate;
-        demoVideo.playbackRate = playbackRate;
-        isEnforcingPlaybackRate = false;
+    const sync = function () {
+        scrollButton.classList.toggle('visible', window.scrollY > 300);
     };
-
-    applyPlaybackRate();
-    demoVideo.addEventListener('loadedmetadata', applyPlaybackRate);
-    demoVideo.addEventListener('canplay', applyPlaybackRate);
-    demoVideo.addEventListener('play', applyPlaybackRate);
-    demoVideo.addEventListener('ratechange', () => {
-        if (demoVideo.playbackRate !== playbackRate) {
-            applyPlaybackRate();
-        }
-    });
+    sync();
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync, { passive: true });
 }
 
-$(document).ready(function() {
-    if (typeof bulmaCarousel !== 'undefined' && document.querySelector('.carousel')) {
-        var options = {
-            slidesToScroll: 1,
-            slidesToShow: 1,
-            loop: true,
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 5000,
-        };
-
-        bulmaCarousel.attach('.carousel', options);
-    }
-
-    if (typeof bulmaSlider !== 'undefined') {
-        bulmaSlider.attach();
-    }
-
-    setupVideoCarouselAutoplay();
-    setupDemoVideoPlayback();
-});
-
-// ---------------------------------------------------------------------------
 // Sticky section navigation: mobile toggle, stuck state, active link
-// ---------------------------------------------------------------------------
 function setupNav() {
     const nav = document.getElementById('siteNav');
     const toggle = document.querySelector('.nav-toggle');
@@ -213,6 +96,8 @@ function setupNav() {
     };
     syncStuckState();
     window.addEventListener('scroll', syncStuckState, { passive: true });
+    window.addEventListener('resize', syncStuckState, { passive: true });
+    window.addEventListener('hashchange', syncStuckState);
 
     const sectionLinks = Array.prototype.slice.call(links.querySelectorAll('a[href^="#"]'));
     const sections = sectionLinks
@@ -231,6 +116,10 @@ function setupNav() {
     }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
 
     sections.forEach(function (section) { observer.observe(section); });
+
+    // Close the menu when a link is followed (covers keyboard activation too).
+    window.addEventListener('hashchange', closeMenu);
 }
 
+setupScrollToTop();
 setupNav();
