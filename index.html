@@ -42,7 +42,7 @@
   <meta name="citation_author" content="Li, Juntao">
   <meta name="citation_author" content="Zhang, Min">
   <meta name="citation_publication_date" content="2026">
-  <meta name="citation_conference_title" content="Preprint">
+  <meta name="citation_conference_title" content="NeurIPS 2026">
   <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2604.07394">
 
   <meta name="theme-color" content="#0f766e">
@@ -87,27 +87,56 @@
     "datePublished": "2026-03-21",
     "publisher": {
       "@type": "Organization",
-      "name": "Preprint"
+      "name": "NeurIPS 2026"
     }
   }
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#abstract">Skip to content</a>
+
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
+    <i class="fas fa-chevron-up" aria-hidden="true"></i>
   </button>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="site-nav" id="siteNav" aria-label="Section navigation">
+    <div class="container is-max-desktop">
+      <div class="nav-inner">
+        <a class="nav-brand" href="#top">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span>FluxAttention</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle section navigation">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="#abstract">Abstract</a>
+          <a href="#insight">Insight</a>
+          <a href="#method">Method</a>
+          <a href="#results">Results</a>
+          <a href="#validation">Validation</a>
+          <a href="#BibTeX">BibTeX</a>
+          <a class="nav-cta" href="https://arxiv.org/abs/2604.07394" target="_blank" rel="noopener">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+            <span>Paper</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
 
   <main id="main-content">
 
     <!-- ===== HERO ===== -->
-    <section class="hero publication-header">
+    <section class="hero publication-header" id="top">
       <div class="hero-body">
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column has-text-centered">
               <h1 class="title is-1 publication-title">FluxAttention: Context-Aware Hybrid Attention for Efficient LLMs Inference</h1>
 
-              <h3 class="title is-4 publication-venue">NeurIPS 2026</h3>
+              <h3 class="title is-4 publication-venue"><i class="fas fa-star" aria-hidden="true"></i>NeurIPS 2026</h3>
 
               <div class="is-size-5 publication-authors">
                 <span class="author-block">Quantong Qiu<sup>1</sup></span>
@@ -120,57 +149,43 @@
                 <span class="author-block">Min Zhang<sup>1</sup></span>
               </div>
 
-              <div class="is-size-6 publication-authors">
+              <div class="is-size-6 affiliation-line">
                 <span class="author-block"><sup>1</sup>School of Computer Science and Technology, Soochow University</span>
                 <span class="author-block"><sup>2</sup>Baidu Inc, China</span>
-                <span class="author-block">* Corresponding author: ljt@suda.edu.cn</span>
               </div>
+              <p class="is-size-6 corresponding">* Corresponding author: ljt@suda.edu.cn</p>
 
-              <div class="column has-text-centered">
-                <div class="publication-links">
-                  <span class="link-block">
-                    <a href="https://arxiv.org/pdf/2604.07394" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                      <span>Paper</span>
-                    </a>
-                  </span>
-                  <span class="link-block">
-                    <a href="https://arxiv.org/abs/2604.07394" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fas fa-book"></i></span>
-                      <span>arXiv</span>
-                    </a>
-                  </span>
-                  <span class="link-block">
-                    <a href="https://github.com/qqtang-code/FluxAttention" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fas fa-code-branch"></i></span>
-                      <span>Repo</span>
-                    </a>
-                  </span>
-                  <span class="link-block">
-                    <a href="#insight" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fas fa-play-circle"></i></span>
-                      <span>Insight</span>
-                    </a>
-                  </span>
-                  <span class="link-block">
-                    <a href="#method" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fas fa-cogs"></i></span>
-                      <span>Method</span>
-                    </a>
-                  </span>
-                  <span class="link-block">
-                    <a href="#results" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fas fa-chart-bar"></i></span>
-                      <span>Results</span>
-                    </a>
-                  </span>
-                  <span class="link-block">
-                    <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="fas fa-quote-right"></i></span>
-                      <span>BibTeX</span>
-                    </a>
-                  </span>
-                </div>
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2604.07394" target="_blank" rel="noopener" class="button link-btn is-primary">
+                    <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2604.07394" target="_blank" rel="noopener" class="button link-btn">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/qqtang-code/FluxAttention" target="_blank" rel="noopener" class="button link-btn">
+                    <i class="fas fa-code-branch" aria-hidden="true"></i>
+                    <span>Repo</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://huggingface.co/collections/QQTang1223/flux-attention" target="_blank" rel="noopener" class="button link-btn">
+                    <i class="fas fa-cube" aria-hidden="true"></i>
+                    <span>Models</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#BibTeX" class="button link-btn">
+                    <i class="fas fa-quote-right" aria-hidden="true"></i>
+                    <span>BibTeX</span>
+                  </a>
+                </span>
               </div>
             </div>
           </div>
@@ -179,9 +194,9 @@
     </section>
 
     <!-- ===== HIGHLIGHT NUMBERS ===== -->
-    <section class="section">
+    <section class="section section--tight">
       <div class="container is-max-desktop">
-        <div class="columns is-variable is-5 insight-cards">
+        <div class="columns is-variable is-5 insight-cards highlight-row">
           <div class="column">
             <div class="insight-card highlight-card">
               <div class="highlight-number">2.8&times;</div>
@@ -208,12 +223,14 @@
     </section>
 
     <!-- ===== ABSTRACT ===== -->
-    <section class="section hero is-light" id="abstract">
+    <section class="section section--tint" id="abstract">
       <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
+        <div class="section-heading has-text-centered">
+          <h2 class="title is-3">Abstract</h2>
+        </div>
+        <div class="columns is-centered">
           <div class="column is-four-fifths">
-            <h2 class="title is-3">Abstract</h2>
-            <div class="content has-text-justified">
+            <div class="abstract-text">
               <p>
                 The quadratic computational complexity of standard attention mechanisms presents a severe scalability bottleneck for LLMs in long-context scenarios. While hybrid attention mechanisms combining Full Attention (FA) and Sparse Attention (SA) offer a potential solution, existing methods typically rely on static allocation ratios that fail to accommodate the variable retrieval demands of different tasks.
               </p>
@@ -235,34 +252,33 @@
         <div class="section-heading has-text-centered">
           <p class="section-kicker">Key Insight</p>
           <h2 class="title is-3">Why Static or Head-Level Sparsity Is Not Enough</h2>
-          <h2 class="title is-3">Context-Aware Routing Should Happen at Layer Granularity</h2>
           <p class="section-intro">
-            FluxAttention uses a lightweight Layer Router to adaptively select Full Attention or Sparse Attention per layer, preserving retrieval quality while improving practical efficiency.
+            Task demands vary: retrieval-intensive prompts need denser token interaction, while context-holistic ones tolerate far more sparsity. A single fixed ratio therefore cannot serve both.
           </p>
         </div>
 
         <figure class="figure-panel">
-          <img src="static/images/fluxattention/preliminary.png" alt="FluxAttention motivation: task-dependent sparsity sensitivity and decode efficiency comparison" loading="lazy">
-          <figcaption>
-            Impact of sparsity on model quality and decode efficiency: static sparsity can trigger task-specific performance collapse, while layer-level routing provides better practical speedup than head-level routing.
-          </figcaption>
+          <img src="static/images/fluxattention/preliminary.png" width="1368" height="704" decoding="async" alt="Two-panel figure: task performance versus sparsity level, and decoding latency versus sequence length for dense, head-level and layer-level sparsity" loading="lazy">
         </figure>
 
-        <div class="columns is-variable is-5 insight-cards" style="margin-top: 2.5rem;">
+        <div class="columns is-variable is-5 insight-cards">
           <div class="column">
             <div class="insight-card">
+              <span class="card-icon" aria-hidden="true"><i class="fas fa-chart-line"></i></span>
               <h3>Static Ratios Are Brittle</h3>
-              <p>Task requirements vary: retrieval-intensive tasks need denser token interaction, while context-holistic tasks can tolerate higher sparsity.</p>
+              <p>Retrieval-intensive tasks need denser token interaction, while context-holistic tasks can tolerate higher sparsity. One ratio for every input cannot satisfy both.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
+              <span class="card-icon" aria-hidden="true"><i class="fas fa-layer-group"></i></span>
               <h3>Layer-Level Routing Helps</h3>
-              <p>The router predicts layer-wise attention mode from context, enabling dynamic computation allocation without per-head fragmentation.</p>
+              <p>The router predicts the attention mode per layer from context, enabling dynamic computation allocation without per-head fragmentation.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
+              <span class="card-icon" aria-hidden="true"><i class="fas fa-microchip"></i></span>
               <h3>Hardware Efficiency Matters</h3>
               <p>Uniform layer-level workloads reduce synchronization stalls and better translate theoretical FLOP savings into wall-clock decode gains.</p>
             </div>
@@ -272,7 +288,7 @@
     </section>
 
     <!-- ===== METHOD ===== -->
-    <section class="section" id="method">
+    <section class="section section--tint" id="method">
       <div class="container is-max-desktop">
         <div class="section-heading has-text-centered">
           <p class="section-kicker">Method</p>
@@ -283,27 +299,30 @@
         </div>
 
         <figure class="figure-panel">
-          <img src="static/images/fluxattention/arch.png" alt="FluxAttention method overview with layer router and hybrid attention routing" loading="lazy">
+          <img src="static/images/fluxattention/arch.png" width="1282" height="598" decoding="async" alt="Method diagram: a Layer Router inside each transformer block, with soft routing during training and hard routing at inference" loading="lazy">
           <figcaption>
-            <strong>Method overview.</strong> The router evaluates prompt context and routes each layer to FA or SA. Training updates only the router while freezing backbone LLM parameters.
+            <strong>Method overview.</strong> The router evaluates prompt context and routes each layer to full or sparse attention. Training updates only the router while the backbone LLM stays frozen.
           </figcaption>
         </figure>
 
-        <div class="columns is-variable is-5 insight-cards" style="margin-top: 2.5rem;">
+        <div class="columns is-variable is-5 insight-cards">
           <div class="column">
             <div class="insight-card">
+              <span class="card-icon" aria-hidden="true"><i class="fas fa-route"></i></span>
               <h3>Layer Router</h3>
               <p>Routes each layer to Full Attention or Sparse Attention according to the current context and retrieval demand.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
+              <span class="card-icon" aria-hidden="true"><i class="fas fa-sliders-h"></i></span>
               <h3>Soft-to-Hard Routing</h3>
               <p>Uses differentiable Gumbel-Softmax in training and deterministic hard routing in inference for practical deployment.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
+              <span class="card-icon" aria-hidden="true"><i class="fas fa-bolt"></i></span>
               <h3>Parameter Efficiency</h3>
               <p>The router can be trained efficiently on frozen pretrained LLMs, requiring only 12 hours on 8&times;A800 GPUs.</p>
             </div>
@@ -313,62 +332,61 @@
     </section>
 
     <!-- ===== RESULTS ===== -->
-    <section class="section hero is-light" id="results">
+    <section class="section" id="results">
       <div class="container is-max-desktop">
         <div class="section-heading has-text-centered">
           <p class="section-kicker">Results</p>
           <h2 class="title is-3">Better Speed-Performance Trade-Offs Across Benchmarks</h2>
         </div>
 
-        <!-- Teaser: Throughput & Memory Trade-off -->
-        <figure class="figure-panel" style="margin-bottom: 2.5rem;">
-          <img src="static/images/fluxattention/speedup.png" alt="FluxAttention speedup summary in prefill and decode stages" loading="lazy" style="max-width: 80%; margin: 0 auto;">
+        <figure class="figure-panel is-plain">
+          <img class="is-narrow" src="static/images/fluxattention/speedup.png" width="1084" height="376" decoding="async" alt="Bar charts of prefill and decode speedup over dense attention across context lengths" loading="lazy">
           <figcaption>
-            Main claim from the paper: FluxAttention achieves up to 2.8&times; prefill speedup and 2.0&times; decode speedup while maintaining strong task performance.
+            FluxAttention reaches up to 2.8&times; prefill speedup and 2.0&times; decode speedup over dense attention while holding task performance.
           </figcaption>
         </figure>
 
-        <div class="columns is-variable is-5 insight-cards" style="margin-top: 2rem;">
+        <div class="columns is-variable is-5 insight-cards">
           <div class="column">
             <div class="insight-card">
+              <span class="card-icon" aria-hidden="true"><i class="fas fa-shuffle"></i></span>
               <h3>Dynamic Task Adaptation</h3>
               <p>The router adjusts layer sparsity by context, improving robustness across retrieval-intensive and context-holistic tasks.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
+              <span class="card-icon" aria-hidden="true"><i class="fas fa-gauge-high"></i></span>
               <h3>Real Decode Gains</h3>
-              <p>Layer-level routing avoids head-level synchronization long-tail and delivers stronger decode acceleration in practice.</p>
+              <p>Layer-level routing avoids the head-level synchronization long tail and delivers stronger decode acceleration in practice.</p>
             </div>
           </div>
           <div class="column">
             <div class="insight-card">
+              <span class="card-icon" aria-hidden="true"><i class="fas fa-clock"></i></span>
               <h3>Fast Adaptation Cost</h3>
               <p>Parameter-efficient tuning converges in about 12 hours on 8&times;A800 GPUs with frozen backbone weights.</p>
             </div>
           </div>
         </div>
 
-        <figure class="figure-panel" style="margin-top: 2.5rem;">
-          <img src="static/images/fluxattention/dynamic.png" alt="FluxAttention detailed results on efficiency and performance trade-offs" loading="lazy" style="max-width: 70%; margin: 0 auto;">
+        <figure class="figure-panel">
+          <img class="is-narrow" src="static/images/fluxattention/dynamic.png" width="1290" height="660" decoding="async" alt="Heatmap of the attention mode selected per layer for different task categories" loading="lazy">
           <figcaption>
-            Dynamic routing patterns show that the model learns to allocate attention modes according to task demands, with more FA layers for retrieval-intensive tasks and more SA layers for context-holistic tasks.
+            The router allocates attention modes according to task demands, keeping more full-attention layers for retrieval-intensive tasks and more sparse layers for context-holistic ones.
           </figcaption>
         </figure>
 
-        <!-- Budget-Accuracy Curves -->
-        <figure class="figure-panel" style="margin-top: 2.5rem;">
-          <img src="static/images/fluxattention/longbench.png" alt="FluxAttention detailed results on efficiency and performance trade-offs" loading="lazy">
-          <figcaption>
-            Detailed comparisons highlight robust quality under adaptive sparsity and practical acceleration benefits from layer-level routing.
-          </figcaption>
+        <figure class="figure-panel figure-panel--scroll">
+          <img src="static/images/fluxattention/longbench.png" width="1364" height="922" decoding="async" alt="Table of LongBench-E results per task category for Qwen3-4B, Qwen3-8B and Llama-3.1-8B-Instruct with DuoAttention, PruLong and TriangleMix baselines" loading="lazy">
+          <p class="figure-scroll-hint"><i class="fas fa-arrows-left-right" aria-hidden="true"></i> Scroll horizontally to see the full table</p>
         </figure>
 
       </div>
     </section>
 
-    <!-- ===== RECONSTRUCTION VALIDATION ===== -->
-    <section class="section hero is-light" id="validation">
+    <!-- ===== EXPERIMENTAL VALIDATION ===== -->
+    <section class="section section--tint" id="validation">
       <div class="container is-max-desktop">
         <div class="section-heading has-text-centered">
           <p class="section-kicker">Experimental Validation</p>
@@ -378,48 +396,48 @@
           </p>
         </div>
 
-        <figure class="figure-panel">
-          <img src="static/images/fluxattention/ruler.png" alt="FluxAttention benchmark validation across long-context and reasoning tasks" loading="lazy">
-          <figcaption>
-            Benchmark validation demonstrates that FluxAttention improves the performance-efficiency trade-off across long-context and mathematical reasoning settings.
-          </figcaption>
+        <figure class="figure-panel figure-panel--scroll">
+          <img src="static/images/fluxattention/ruler.png" width="1368" height="952" decoding="async" alt="Table of RULER, LongBench-v2 and math benchmark results for Qwen3-4B, Qwen3-8B and Llama-3.1-8B-Instruct backbones" loading="lazy">
+          <p class="figure-scroll-hint"><i class="fas fa-arrows-left-right" aria-hidden="true"></i> Scroll horizontally to see the full table</p>
         </figure>
       </div>
     </section>
 
     <!-- ===== BIBTEX ===== -->
     <section class="section" id="BibTeX">
-      <div class="container is-max-desktop content">
+      <div class="container is-max-desktop">
         <div class="bibtex-header">
           <h2 class="title">BibTeX</h2>
-          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-            <i class="fas fa-copy"></i>
+          <button class="copy-bibtex-btn" type="button" onclick="copyBibTeX()" aria-label="Copy BibTeX entry to clipboard">
+            <i class="fas fa-copy" aria-hidden="true"></i>
             <span class="copy-text">Copy</span>
           </button>
         </div>
+        <div class="bibtex-block">
           <pre id="bibtex-code"><code>@article{qiu2026flux,
   title={Flux Attention: Context-Aware Hybrid Attention for Efficient LLMs Inference},
   author={Qiu, Quantong and Hong, Zhiyi and Yang, Yi and Wang, Haitian and Liu, Kebin and Dang, Qingqing and Li, Juntao and Zhang, Min},
   journal={arXiv preprint arXiv:2604.07394},
   year={2026}
-}
 }</code></pre>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content has-text-centered">
-            <p>
-              This page is based on the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>, adapted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            </p>
-          </div>
-        </div>
+  <footer class="site-footer">
+    <div class="container is-max-desktop">
+      <div class="footer-links">
+        <a href="https://arxiv.org/abs/2604.07394" target="_blank" rel="noopener"><i class="fas fa-file-lines" aria-hidden="true"></i>Paper</a>
+        <a href="https://github.com/qqtang-code/FluxAttention" target="_blank" rel="noopener"><i class="fas fa-code-branch" aria-hidden="true"></i>Code</a>
+        <a href="https://huggingface.co/collections/QQTang1223/flux-attention" target="_blank" rel="noopener"><i class="fas fa-cube" aria-hidden="true"></i>Models</a>
+        <a href="https://modelscope.cn/collections/tang031223/Flux-Attention" target="_blank" rel="noopener"><i class="fas fa-database" aria-hidden="true"></i>ModelScope</a>
+        <a href="#BibTeX"><i class="fas fa-quote-right" aria-hidden="true"></i>BibTeX</a>
       </div>
+      <p class="footer-note">
+        Built on the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>, adapted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page.
+      </p>
     </div>
   </footer>
 </body>

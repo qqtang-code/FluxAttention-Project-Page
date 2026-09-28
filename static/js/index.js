@@ -44,35 +44,43 @@ document.addEventListener('keydown', function(event) {
 function copyBibTeX() {
     const bibtexElement = document.getElementById('bibtex-code');
     const button = document.querySelector('.copy-bibtex-btn');
+    if (!bibtexElement || !button) return;
+
     const copyText = button.querySelector('.copy-text');
-    
-    if (bibtexElement) {
-        navigator.clipboard.writeText(bibtexElement.textContent).then(function() {
-            // Success feedback
-            button.classList.add('copied');
-            copyText.textContent = 'Copy';
-            
-            setTimeout(function() {
-                button.classList.remove('copied');
-                copyText.textContent = 'Copy';
-            }, 2000);
-        }).catch(function(err) {
-            console.error('Failed to copy: ', err);
-            // Fallback for older browsers
-            const textArea = document.createElement('textarea');
-            textArea.value = bibtexElement.textContent;
-            document.body.appendChild(textArea);
-            textArea.select();
+    const originalLabel = copyText ? copyText.textContent : '';
+
+    const showFeedback = function () {
+        button.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(function () {
+            button.classList.remove('copied');
+            if (copyText) copyText.textContent = originalLabel;
+        }, 2000);
+    };
+
+    const copyWithFallback = function () {
+        const textArea = document.createElement('textarea');
+        textArea.value = bibtexElement.textContent;
+        textArea.setAttribute('readonly', '');
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
             document.execCommand('copy');
-            document.body.removeChild(textArea);
-            
-            button.classList.add('copied');
-            copyText.textContent = 'Copy';
-            setTimeout(function() {
-                button.classList.remove('copied');
-                copyText.textContent = 'Copy';
-            }, 2000);
-        });
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+        document.body.removeChild(textArea);
+        showFeedback();
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(bibtexElement.textContent)
+            .then(showFeedback)
+            .catch(copyWithFallback);
+    } else {
+        copyWithFallback();
     }
 }
 
@@ -172,3 +180,57 @@ $(document).ready(function() {
     setupVideoCarouselAutoplay();
     setupDemoVideoPlayback();
 });
+
+// ---------------------------------------------------------------------------
+// Sticky section navigation: mobile toggle, stuck state, active link
+// ---------------------------------------------------------------------------
+function setupNav() {
+    const nav = document.getElementById('siteNav');
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.getElementById('navLinks');
+    if (!nav || !toggle || !links) return;
+
+    const closeMenu = function () {
+        links.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+    };
+
+    toggle.addEventListener('click', function () {
+        const isOpen = links.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    links.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeMenu();
+    });
+
+    const syncStuckState = function () {
+        nav.classList.toggle('is-stuck', window.scrollY > 8);
+    };
+    syncStuckState();
+    window.addEventListener('scroll', syncStuckState, { passive: true });
+
+    const sectionLinks = Array.prototype.slice.call(links.querySelectorAll('a[href^="#"]'));
+    const sections = sectionLinks
+        .map(function (link) { return document.querySelector(link.getAttribute('href')); })
+        .filter(Boolean);
+
+    if (!sections.length || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            sectionLinks.forEach(function (link) {
+                link.classList.toggle('is-active', link.getAttribute('href') === '#' + entry.target.id);
+            });
+        });
+    }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+
+    sections.forEach(function (section) { observer.observe(section); });
+}
+
+setupNav();
